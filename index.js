@@ -116,7 +116,7 @@ app.delete('/rides/:id', async (req, res) => {
 });
 
 // Users endpoints
-app.get('/users', async (req, res) => {
+/*app.get('/users', async (req, res) => {
   try {
     const users = await usersCollection.find().toArray();
     res.json(users);
@@ -195,6 +195,7 @@ app.delete('/users/:id', async (req, res) => {
     res.status(400).json({ error: 'Invalid user ID' });
   }
 });
+*/
 
 // Documentation endpoint
 app.get('/docs', (req, res) => {
