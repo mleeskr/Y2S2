@@ -256,6 +256,12 @@
       <div id="ridesStatus" class="status"></div>
       <div id="ridesList" class="list"></div>
     </section>
+    <section class="section">
+      <h2><i class="fas fa-users"></i> Our Users</h2>
+      <button id="loadUsers" class="btn"><i class="fas fa-sync-alt"></i> Load Users</button>
+      <div id="usersStatus" class="status"></div>
+      <div id="usersList" class="list"></div>
+    </section>
       
     <div class="footer">
       <p>Made with <i class="fas fa-heart" style="color: var(--dark-pink);"></i> by Hello Kitty Team<i class="fas fa-heart" style="color: var(--dark-pink);"></i></p>
@@ -282,7 +288,7 @@
       `;
     }
   
-  /*  function createUserCard(user) {
+    function createUserCard(user) {
       return `
         <div class="card user-card">
           <h3>${user.name || 'Anonymous User'}</h3>
@@ -295,7 +301,7 @@
         </div>
       `;
     }
-  */
+  
     // Load Rides
     document.getElementById('loadRides').addEventListener('click', async () => {
       showStatus('ridesStatus', 'Loading rides...', 'loading');
@@ -325,7 +331,7 @@
       }
     });
   
-    /*// Load Users
+    //Load Users
     document.getElementById('loadUsers').addEventListener('click', async () => {
       showStatus('usersStatus', 'Loading users...', 'loading');
   
@@ -353,7 +359,7 @@
         console.error('Error loading users:', err);
       }
     });
-  */
+  
     // Initial animation
     document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => {
