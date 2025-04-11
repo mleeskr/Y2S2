@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hello Kitty Ride Hailing</title>
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --pink: #ff9ff3;
+      --light-pink: #ffd6f4;
+      --dark-pink: #f368e0;
+      --yellow: #feca57;
+      --white: #fff;
+      --black: #2f3640;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Comic Neue', cursive;
+      background-color: var(--light-pink);
+      color: var(--black);
+      min-height: 100vh;
+      background-image: url('https://i.imgur.com/sEhwQR9.png');
+      background-size: 200px;
+      background-repeat: repeat;
+      background-attachment: fixed;
+      opacity: 0;
+      animation: fadeIn 1s forwards;
+    }
+    
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+    
+  
+    
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-10px); }
+    }
+    
+    h1 {
+      font-size: 3rem;
+      color: var(--dark-pink);
+      margin-top: 1rem;
+      text-shadow: 3px 3px 0 var(--yellow);
+      position: relative;
+      z-index: 5;
+      background-color: var(--white);
+      display: inline-block;
+      padding: 0 2rem;
+      border-radius: 50px;
+      border: 3px dashed var(--dark-pink);
+    }
+    
+    .section {
+      background-color: var(--white);
+      border-radius: 20px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      border: 3px solid var(--pink);
+      transform: scale(0.95);
+      transition: transform 0.3s ease;
+    }
+    
+    .section:hover {
+      transform: scale(1);
+    }
+    
+    h2 {
+      color: var(--dark-pink);
+      margin-bottom: 1rem;
+      font-size: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    h2 i {
+      color: var(--yellow);
+    }
+    
+    .btn {
+      background-color: var(--pink);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 1.2rem;
+      border-radius: 50px;
+      cursor: pointer;
+      font-family: 'Comic Neue', cursive;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 0 var(--dark-pink);
+      margin-bottom: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 0 var(--dark-pink);
+    }
+    
+    .btn:active {
+      transform: translateY(2px);
+      box-shadow: 0 3px 0 var(--dark-pink);
+    }
+    
+    .status {
+      margin-bottom: 1rem;
+      padding: 10px;
+      border-radius: 10px;
+      font-weight: bold;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .status.show {
+      opacity: 1;
+    }
+    
+    .loading {
+      color: var(--dark-pink);
+    }
+    
+    .success {
+      color: #10ac84;
+      background-color: #55efc4;
+    }
+    
+    .error {
+      color: #ee5253;
+      background-color: #ff9ff3;
+    }
+    
+    .empty {
+      color: #f39c12;
+      background-color: #f7d794;
+    }
+    
+    .list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1rem;
+    }
+    
+    .card {
+      background-color: var(--white);
+      border-radius: 15px;
+      padding: 1.5rem;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      border: 2px solid var(--pink);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    }
+    
+    .card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 50px;
+      height: 50px;
+      background-image: url('https://i.imgur.com/DeC5jep.jpeg');
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+    
+    .card h3 {
+      color: var(--dark-pink);
+      margin-bottom: 0.5rem;
+      font-size: 1.3rem;
+      border-bottom: 2px dotted var(--pink);
+      padding-bottom: 5px;
+    }
+    
+    .card p {
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .card p i {
+      color: var(--dark-pink);
+      width: 20px;
+      text-align: center;
+    }
+    
+    .ride-card .price {
+      font-weight: bold;
+      color: #10ac84;
+      font-size: 1.2rem;
+    }
+    
+    .user-card .email {
+      color: #0984e3;
+      word-break: break-all;
+    }
+    
+    .footer {
+      text-align: center;
+      margin-top: 2rem;
+      color: var(--dark-pink);
+      font-weight: bold;
+    }
+    
+    @media (max-width: 768px) {
+      .list {
+        grid-template-columns: 1fr;
+      }
+      
+      h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="hello-kitty"></div>
+      <h1>Hello Kitty Ride Hailing</h1>
+    </header>
+    
+    <section class="section">
+      <h2><i class="fas fa-car"></i> Rides Available</h2>
+      <button id="loadRides" class="btn"><i class="fas fa-sync-alt"></i> Load Rides</button>
+      <div id="ridesStatus" class="status"></div>
+      <div id="ridesList" class="list"></div>
+    </section>
+    <section class="section">
+      <h2><i class="fas fa-users"></i> Our Users</h2>
+      <button id="loadUsers" class="btn"><i class="fas fa-sync-alt"></i> Load Users</button>
+      <div id="usersStatus" class="status"></div>
+      <div id="usersList" class="list"></div>
+    </section>
+      
+    <div class="footer">
+      <p>Made with <i class="fas fa-heart" style="color: var(--dark-pink);"></i> by Hello Kitty Team<i class="fas fa-heart" style="color: var(--dark-pink);"></i></p>
+    </div>
+  </div>
+
+  <script>
+    // Helper functions
+    function showStatus(element, message, type) {
+      const statusElement = document.getElementById(element);
+      statusElement.textContent = message;
+      statusElement.className = `status ${type} show`;
+    }
+  
+    function createRideCard(ride) {
+      return `
+        <div class="card ride-card">
+          <h3>${ride.driverId || 'Unknown Driver'}</h3>
+          <p><i class="fas fa-map-marker-alt"></i> <strong>From:</strong> ${ride.pickupLocation || 'Not specified'}</p>
+          <p><i class="fas fa-flag-checkered"></i> <strong>To:</strong> ${ride.destination || 'Not specified'}</p>
+          <p><i class="fas fa-calendar-alt"></i> <strong>Date:</strong> ${new Date(ride.createdAt).toLocaleString()}</p>
+          <p><i class="fas fa-info-circle"></i> <strong>Status:</strong> ${ride.status || 'pending'}</p>
+        </div>
+      `;
+    }
+  
+    function createUserCard(user) {
+      return `
+        <div class="card user-card">
+          <h3>${user.name || 'Anonymous User'}</h3>
+          <p><i class="fas fa-envelope"></i> <strong>Email:</strong> <span class="email">${user.email || 'Not provided'}</span></p>
+          <p><i class="fas fa-phone"></i> <strong>Phone:</strong> ${user.phone || 'Not provided'}</p>
+          <p><i class="fas fa-calendar-alt"></i> <strong>Member since:</strong> ${new Date(user.createdAt).toLocaleDateString()}</p>
+          <p><i class="fas fa-id-card"></i> <strong>User Type:</strong> ${user.type || 'Not active'}</p>
+        </div>
+      `;
+    }
+  
+    // Load Rides
+    document.getElementById('loadRides').addEventListener('click', async () => {
+      showStatus('ridesStatus', 'Loading rides...', 'loading');
+  
+      try {
+        const res = await fetch('http://localhost:3000/rides');
+        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+  
+        const rides = await res.json();
+        const list = document.getElementById('ridesList');
+        list.innerHTML = '';
+  
+        if (rides.length === 0) {
+          showStatus('ridesStatus', 'No rides available right now!', 'empty');
+          list.innerHTML = '<p style="grid-column:1/-1;text-align:center;">No rides found. Check back later!</p>';
+          return;
+        }
+  
+        rides.forEach(ride => {
+          list.innerHTML += createRideCard(ride);
+        });
+  
+        showStatus('ridesStatus', `Successfully loaded ${rides.length} rides!`, 'success');
+      } catch (err) {
+        showStatus('ridesStatus', 'Failed to load rides. Please try again!', 'error');
+        console.error('Error loading rides:', err);
+      }
+    });
+  
+    //Load Users
+    document.getElementById('loadUsers').addEventListener('click', async () => {
+      showStatus('usersStatus', 'Loading users...', 'loading');
+  
+      try {
+        const res = await fetch('http://localhost:3000/users');
+        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+  
+        const users = await res.json();
+        const list = document.getElementById('usersList');
+        list.innerHTML = '';
+  
+        if (users.length === 0) {
+          showStatus('usersStatus', 'No users found in the system!', 'empty');
+          list.innerHTML = '<p style="grid-column:1/-1;text-align:center;">No users registered yet!</p>';
+          return;
+        }
+  
+        users.forEach(user => {
+          list.innerHTML += createUserCard(user);
+        });
+  
+        showStatus('usersStatus', `Successfully loaded ${users.length} users!`, 'success');
+      } catch (err) {
+        showStatus('usersStatus', 'Failed to load users. Please try again!', 'error');
+        console.error('Error loading users:', err);
+      }
+    });
+  
+    // Initial animation
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        const kitty = document.querySelector('.hello-kitty');
+        if (kitty) {
+          kitty.style.transform = 'translateX(-50%) scale(1.2)';
+          setTimeout(() => {
+            kitty.style.transform = 'translateX(-50%)';
+          }, 300);
+        }
+      }, 500);
+    });
+  </script>
+  
+</body>
+</html>
