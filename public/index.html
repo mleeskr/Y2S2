@@ -295,9 +295,7 @@
           <p><i class="fas fa-envelope"></i> <strong>Email:</strong> <span class="email">${user.email || 'Not provided'}</span></p>
           <p><i class="fas fa-phone"></i> <strong>Phone:</strong> ${user.phone || 'Not provided'}</p>
           <p><i class="fas fa-calendar-alt"></i> <strong>Member since:</strong> ${new Date(user.createdAt).toLocaleDateString()}</p>
-          <p><i class="fas fa-id-card"></i> <strong>User Type:</strong> ${user.type || 'Regular'}</p>
-          <p><i class="fas fa-map-marker-alt"></i> <strong>Address:</strong> ${user.address || 'Not specified'}</p>
-          <p><i class="fas fa-star"></i> <strong>Rating:</strong> ${user.rating || 'No ratings yet'}</p>
+          <p><i class="fas fa-id-card"></i> <strong>User Type:</strong> ${user.type || 'Not active'}</p>
         </div>
       `;
     }
