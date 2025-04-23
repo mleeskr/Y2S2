@@ -22,15 +22,16 @@
     }
     
     body {
+      background-color: transparent;
       font-family: 'Comic Neue', cursive;
       background-color: var(--light-pink);
       color: var(--black);
       min-height: 100vh;
-      background-image: url('https://i.imgur.com/sEhwQR9.png');
+      background-image: url('https://i.imgur.com/IlQQGxW.png');
       background-size: 200px;
       background-repeat: repeat;
       background-attachment: fixed;
-      opacity: 0;
+      opacity: 1;
       animation: fadeIn 1s forwards;
     }
     
@@ -513,6 +514,7 @@
   </div>
 
   <script>
+    
     // Helper functions
     function showStatus(element, message, type) {
       const statusElement = document.getElementById(element);

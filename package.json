@@ -18,8 +18,12 @@
   },
   "homepage": "https://github.com/mleeskr/Y2S2#readme",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "express": "^5.1.0",
-    "mongodb": "^6.15.0"
+    "jose": "^6.0.10",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.15.0",
+    "stack": "^0.1.0"
   }
 }
