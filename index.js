@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 const url = 'mongodb://localhost:27017';
-const dbName = 'GrabDB'; // Database name (case-sensitive)
+const dbName = 'rideHailingDB'; // Database name (case-sensitive)
 let db, ridesCollection, usersCollection;
 
 // Initialize database connection
