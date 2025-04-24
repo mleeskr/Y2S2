@@ -9,8 +9,20 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 const url = 'mongodb://localhost:27017';
-const dbName = 'GrabDB'; // Database name (case-sensitive)
-let db, ridesCollection, usersCollection;
+const dbName = 'rideHailingDB';
+const JWT_SECRET = 'your_jwt_secret_key'; // Change this in production
+
+// Hardcoded admin credentials
+const HARDCODED_ADMIN = {
+  email: 'admin@gmail.com',
+  password: 'admin123', // In production, store hashed password
+  name: 'System Admin',
+  role: 'admin'
+};
+
+let db, usersCollection, ridesCollection, driversCollection;
+let completedRidesCollection;
+
 
 // Initialize database connection
 async function initializeDatabase() {
@@ -195,6 +207,30 @@ app.delete('/users/:id', async (req, res) => {
     res.status(400).json({ error: 'Invalid user ID' });
   }
 });
+
+
+// Documentation endpoint
+app.get('/docs', (req, res) => {
+  res.sendFile(path.join(__dirname, 'api-docs.html'));
+});
+
+// Start the server
+async function startServer() {
+  const client = await initializeDatabase();
+  
+  // Graceful shutdown
+  process.on('SIGINT', async () => {
+    await client.close();
+    console.log('🛑 MongoDB connection closed');
+    process.exit(0);
+  });
+  
+  app.listen(port, () => {
+    console.log(🚀 Server running at http://localhost:${port});
+  });
+}
+
+startServer().catch(console.error);
 
 
 // Documentation endpoint
