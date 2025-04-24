@@ -9,20 +9,8 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 const url = 'mongodb://localhost:27017';
-const dbName = 'rideHailingDB';
-const JWT_SECRET = 'your_jwt_secret_key'; // Change this in production
-
-// Hardcoded admin credentials
-const HARDCODED_ADMIN = {
-  email: 'admin@gmail.com',
-  password: 'admin123', // In production, store hashed password
-  name: 'System Admin',
-  role: 'admin'
-};
-
-let db, usersCollection, ridesCollection, driversCollection;
-let completedRidesCollection;
-
+const dbName = 'rideHailingDB'; // Database name (case-sensitive)
+let db, ridesCollection, usersCollection;
 
 // Initialize database connection
 async function initializeDatabase() {
@@ -40,7 +28,7 @@ async function initializeDatabase() {
     await ridesCollection.createIndex({ location: 1 });
     await usersCollection.createIndex({ email: 1 }, { unique: true });
     
-    console.log(✅ Database '${dbName}' and collections initialized);
+    console.log(`✅ Database '${dbName}' and collections initialized`);
     
     return client;
   } catch (error) {
@@ -208,7 +196,6 @@ app.delete('/users/:id', async (req, res) => {
   }
 });
 
-
 // Documentation endpoint
 app.get('/docs', (req, res) => {
   res.sendFile(path.join(__dirname, 'api-docs.html'));
@@ -226,32 +213,8 @@ async function startServer() {
   });
   
   app.listen(port, () => {
-    console.log(🚀 Server running at http://localhost:${port});
+    console.log(`🚀 Server running at http://localhost:${port}`);
   });
 }
 
-startServer().catch(console.error);
-
-
-// Documentation endpoint
-app.get('/docs', (req, res) => {
-  res.sendFile(path.join(__dirname, 'api-docs.html'));
-});
-
-// Start the server
-async function startServer() {
-  const client = await initializeDatabase();
-  
-  // Graceful shutdown
-  process.on('SIGINT', async () => {
-    await client.close();
-    console.log('🛑 MongoDB connection closed');
-    process.exit(0);
-  });
-  
-  app.listen(port, () => {
-    console.log(🚀 Server running at http://localhost:${port});
-  });
-}
-
-startServer().catch(console.error);
+startServer().catch(console.error); 
