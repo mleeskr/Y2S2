@@ -24,6 +24,8 @@ const HARDCODED_ADMIN = {
 };
 
 let db, usersCollection, ridesCollection, driversCollection;
+let completedRidesCollection;
+
 
 // Initialize database connection
 async function initializeDatabase() {
@@ -32,6 +34,7 @@ async function initializeDatabase() {
     console.log('✅ Connected successfully to MongoDB');
     
     db = client.db(dbName);
+    completedRidesCollection = db.collection('completedRides');
     usersCollection = db.collection('users');
     ridesCollection = db.collection('rides');
     driversCollection = db.collection('drivers');
@@ -183,7 +186,7 @@ const driverData = {
   }
 });
 
-//hehe
+
 //Login Endpoint
 app.post('/login', async (req, res) => {
   try {
@@ -238,6 +241,51 @@ app.post('/login', async (req, res) => {
   }
 });
 
+app.patch('/update/:id', authenticateToken, async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Only allow users or drivers to update themselves
+    if (!['user', 'driver'].includes(req.user.role) || req.user.id !== id) {
+      return res.status(403).json({ error: 'Unauthorized to update this user' });
+    }
+
+    const allowedFields = ['name', 'email', 'password'];
+    const updateData = {};
+
+    for (const field of allowedFields) {
+      if (req.body[field]) {
+        updateData[field] = req.body[field];
+      }
+    }
+
+    if (Object.keys(updateData).length === 0) {
+      return res.status(400).json({ error: 'Only name, email, or password can be updated' });
+    }
+
+    // Hash password if updating
+    if (updateData.password) {
+      updateData.password = await bcrypt.hash(updateData.password, 10);
+    }
+
+    const collection = req.user.role === 'user' ? usersCollection : driversCollection;
+
+    const result = await collection.updateOne(
+      { _id: new ObjectId(id) },
+      { $set: updateData }
+    );
+
+    if (result.matchedCount === 0) {
+      return res.status(404).json({ error: 'User/Driver not found' });
+    }
+
+    res.json({ message: 'Profile updated successfully' });
+  } catch (error) {
+    console.error('Error updating user:', error);
+    res.status(400).json({ error: 'Invalid user ID or data' });
+  }
+});
+
 
 
 
@@ -257,6 +305,7 @@ app.post('/user/get-ride', authenticateToken, async (req, res) => {
       userName: req.user.name,
       driverId: null,
       driverName: null,
+      fare: null,
       pickupLocation,
       destination,
       status: 'requested', // Initial status
@@ -278,7 +327,7 @@ app.post('/user/get-ride', authenticateToken, async (req, res) => {
 });
 
 //cancel ride
-app.post('/user/cancel-ride/:id', authenticateToken, async (req, res) => {
+app.delete('/user/cancel-ride/:id', authenticateToken, async (req, res) => {
   try {
     if (req.user.role !== 'user') {
       return res.status(403).json({ error: 'Only users can cancel rides' });
@@ -396,7 +445,7 @@ app.get('/driver/avail-ride', authenticateToken, async (req, res) => {
     }
 
     // Check if driver is available (NEW CHECK)
-    const driver = await usersCollection.findOne({ 
+    const driver = await driversCollection.findOne({ 
       _id: new ObjectId(req.user.id),
       isAvailable: true 
     });
@@ -422,37 +471,45 @@ app.get('/driver/avail-ride', authenticateToken, async (req, res) => {
 //accept job
 app.post('/driver/accept-job/:id', authenticateToken, async (req, res) => {
   try {
-    if (req.user.role !== 'user') {
-      return res.status(403).json({ error: 'Only users can book rides' });
+    if (req.user.role !== 'driver') {
+      return res.status(403).json({ error: 'Only drivers can accept jobs' });
     }
 
-    const { pickupLocation, destination, fare } = req.body;
-    
-    const newRide = {
-      userId: req.user.id,
-      userName: req.user.name,
-      driverId: null,
-      driverName: null,
-      pickupLocation,
-      destination,
-      fare,
-      status: 'requested', // Initial status
-      createdAt: new Date(),
-      updatedAt: new Date()
-    };
+    const { id } = req.params;
 
-    const result = await ridesCollection.insertOne(newRide);
-    
-    res.status(201).json({
-      message: 'Ride booked successfully',
-      rideId: result.insertedId,
-      status: 'requested'
-    });
+    // 1. Find the ride
+    const ride = await ridesCollection.findOne({ _id: new ObjectId(id) });
+
+    if (!ride || ride.status !== 'requested') {
+      return res.status(400).json({ error: 'Ride not found or already accepted' });
+    }
+
+    // 2. Update ride with driver info
+    await ridesCollection.updateOne(
+      { _id: new ObjectId(id) },
+      {
+        $set: {
+          driverId: req.user.id,
+          driverName: req.user.name,
+          status: 'accepted',
+          updatedAt: new Date()
+        }
+      }
+    );
+
+    // 3. Mark driver as not available
+    await driversCollection.updateOne(
+      { _id: new ObjectId(req.user.id) },
+      { $set: { isAvailable: false } }
+    );
+
+    res.json({ message: 'Ride accepted successfully' });
   } catch (error) {
-    console.error('Error booking ride:', error);
-    res.status(500).json({ error: 'Failed to book ride' });
+    console.error('Error accepting ride:', error);
+    res.status(500).json({ error: 'Failed to accept ride' });
   }
 });
+
 
 //complete job
 app.patch('/driver/complete-job/:Id', authenticateToken, async (req, res) => {
@@ -462,55 +519,57 @@ app.patch('/driver/complete-job/:Id', authenticateToken, async (req, res) => {
     }
 
     const { Id } = req.params;
-    const { fare } = req.body; // Assuming fare is confirmed at completion
+    const { fare } = req.body;
 
-    // 1. Get the ride first
+   
     const ride = await ridesCollection.findOne({ 
       _id: new ObjectId(Id),
       driverId: req.user.id 
     });
 
     if (!ride) {
+      console.log('Ride not found or not assigned to driver');
       return res.status(404).json({ error: 'Ride not found or not assigned to you' });
     }
 
-    // 2. Create completed ride document
+    const finalFare = fare || ride.fare;
+    if (isNaN(finalFare)) {
+      return res.status(400).json({ error: 'Fare must be a number' });
+    }
+
+   
+
     const completedRide = {
       ...ride,
       status: 'completed',
       completedAt: new Date(),
-      fare: fare || ride.fare,
-      driverRating: null, // Will be set when user rates
-      userReview: null   // Will be set when user reviews
+      fare: finalFare,
+     
+      userReview: null
     };
 
-    // 3. Start transaction to move the ride
-    const session = db.client.startSession();
-    try {
-      await session.withTransaction(async () => {
-        // Insert into completed rides
-        await completedRidesCollection.insertOne(completedRide, { session });
-        
-        // Delete from active rides
-        await ridesCollection.deleteOne({ _id: new ObjectId(rideId) }, { session });
-        
-        // Update driver's availability
-        await driversCollection.updateOne(
-          { _id: new ObjectId(req.user.id) },
-          { $set: { isAvailable: true } }, // Make driver available again
-          { session }
-        );
-      });
-    } finally {
-      await session.endSession();
-    }
+   
+    await completedRidesCollection.insertOne(completedRide);
 
+   
+    await ridesCollection.deleteOne({ _id: ride._id });
+
+   
+    await driversCollection.updateOne(
+      { _id: new ObjectId(req.user.id) },
+      { $set: { isAvailable: true } }
+    );
+
+    
     res.json({ message: 'Ride completed successfully' });
+
   } catch (error) {
-    console.error('Error completing ride:', error);
+    console.error('❌ Error completing ride:', error);
     res.status(500).json({ error: 'Failed to complete ride' });
   }
 });
+
+
 
 // Driver gets earnings and completed rides
 app.get('/driver/stats', authenticateToken, async (req, res) => {
@@ -591,7 +650,7 @@ app.get('/admin/users', authenticateToken, async (req, res) => {
   if (req.user.role !== 'admin') return res.sendStatus(403);
   
   try {
-    const drivers = await usersCollection.find({ role: 'user' }).toArray();
+    const users = await usersCollection.find({ role: 'user' }).toArray();
     res.json(users);
   } catch (error) {
     console.error('Error fetching users:', error);
@@ -617,15 +676,25 @@ app.delete('/admin/delete/:id', authenticateToken, async (req, res) => {
   if (req.user.role !== 'admin') return res.sendStatus(403);
   try {
     const { id } = req.params;
-    let result = await usersCollection.deleteOne({ _id: new ObjectId(id) })||
-                  await driversCollection.deleteOne({ _id: new ObjectId(id) })||
-                    await ridesCollection.deleteOne({ _id: new ObjectId(id) });
-    
-    if (result.deletedCount === 0) {
-      return res.status(404).json({ error: 'ID not found' });
+    let result;
+
+    // Try to delete from users
+    result = await usersCollection.deleteOne({ _id: new ObjectId(id) });
+    if (result.deletedCount > 0) {
+      return res.json({ message: 'User deleted successfully' });
     }
     
-    res.json({ message: 'Deleted successfully' });
+    // Try to delete from drivers
+    result = await driversCollection.deleteOne({ _id: new ObjectId(id) });
+    if (result.deletedCount > 0) {
+      return res.json({ message: 'Driver deleted successfully' });
+    }
+    
+    // Try to delete from rides
+    result = await ridesCollection.deleteOne({ _id: new ObjectId(id) });
+    if (result.deletedCount > 0) {
+      return res.json({ message: 'Ride deleted successfully' });
+    }
   } catch (error) {
     console.error('Error deleting :', error);
     res.status(400).json({ error: 'Invalid ID' });
