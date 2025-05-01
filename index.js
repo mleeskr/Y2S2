@@ -75,7 +75,7 @@ app.post('/register', async (req, res) => {
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
     
-    let result, token, responseData;
+    let result, responseData;
 
     if (role === 'driver') {
       // Create driver data
@@ -87,7 +87,6 @@ const driverData = {
   role,
   vehicleInfo: req.body.vehicleInfo || {},
   licenseNumber: req.body.licenseNumber || '',
-  isApproved: false,
   isAvailable: true, // New drivers start as available
   averageRating: 0,  // Initialize rating
   totalEarnings: 0,  // Initialize earnings
@@ -97,21 +96,7 @@ const driverData = {
       
       // Insert into drivers collection
       result = await driversCollection.insertOne(driverData);
-      token = generateToken({
-        _id: result.insertedId,
-        email,
-        name,
-        role
-      });
-      
-      responseData = {
-        _id: result.insertedId,
-        email,
-        name,
-        role,
-        isApproved: false,
-        token
-      };
+     
     } else {
       // Create user data
       const userData = {
@@ -125,21 +110,7 @@ const driverData = {
       
       // Insert into users collection
       result = await usersCollection.insertOne(userData);
-      token = generateToken({
-        _id: result.insertedId,
-        email,
-        name,
-        role
-      });
       
-      responseData = {
-        _id: result.insertedId,
-        email,
-        name,
-        role,
-        isApproved: true,
-        token
-      };
     }
 
     res.status(201).json(responseData);
@@ -155,31 +126,13 @@ app.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
     
-    // First check if it's the hardcoded admin
-    if (email === HARDCODED_ADMIN.email) {
-      if (password === HARDCODED_ADMIN.password) {
-        const token = generateToken(HARDCODED_ADMIN);
-        return res.json({
-          email: HARDCODED_ADMIN.email,
-          name: HARDCODED_ADMIN.name,
-          role: HARDCODED_ADMIN.role,
-          token
-        });
-      }
-      return res.status(401).json({ error: 'Invalid credentials' });
-    }
-    
     // Check regular users/drivers
     const user = await usersCollection.findOne({ email })||await driversCollection.findOne({ email });
     
-    if (!user) {
+    if (!user || !driver) {
       return res.status(404).json({ error: 'User or Driver not found not found' });
     }
     
-    // Check if driver is approved
-    if (user.role === 'driver' && !user.isApproved) {
-      return res.status(403).json({ error: 'Driver account pending approval' });
-    }
     
     // Verify password
     const passwordMatch = await bcrypt.compare(password, user.password);
@@ -187,17 +140,10 @@ app.post('/login', async (req, res) => {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
     
-    // Generate token
-    const token = generateToken(user);
-    
-    res.json({
-      _id: user._id,
-      email: user.email,
-      name: user.name,
-      role: user.role,
-      isApproved: user.isApproved,
-      token
-    });
+   
+    res.json(
+      "login success"
+    );
   } catch (error) {
     console.error('Error during login:', error);
     res.status(500).json({ error: 'Internal server error' });
