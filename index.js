@@ -132,7 +132,7 @@ app.post('/login', async (req, res) => {
     // Check regular users/drivers
     const user = await usersCollection.findOne({ email })||await driversCollection.findOne({ email });
     
-    if (!user || !driver) {
+    if (!user ) {
       return res.status(404).json({ error: 'User or Driver not found not found' });
     }
     
@@ -144,9 +144,8 @@ app.post('/login', async (req, res) => {
     }
     
    
-    res.json(
-      "login success"
-    );
+    res.status(201).json({ message: "login success" });
+
   } catch (error) {
     console.error('Error during login:', error);
     res.status(500).json({ error: 'Internal server error' });
