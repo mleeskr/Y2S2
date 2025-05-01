@@ -96,7 +96,8 @@ const driverData = {
       
       // Insert into drivers collection
       result = await driversCollection.insertOne(driverData);
-     
+      responseData = { id: result.insertedId, email, name, role };
+
     } else {
       // Create user data
       const userData = {
@@ -110,8 +111,10 @@ const driverData = {
       
       // Insert into users collection
       result = await usersCollection.insertOne(userData);
-      
+      responseData = { id: result.insertedId, email, name, role };
+
     }
+
 
     res.status(201).json(responseData);
   } catch (error) {
