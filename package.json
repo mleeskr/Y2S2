@@ -24,6 +24,7 @@
     "jose": "^6.0.10",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.15.0",
+    "mongoose": "^8.16.0",
     "stack": "^0.1.0"
   }
 }

@@ -1,0 +1,69 @@
+/* Compact form styling */
+.modal-content {
+  max-height: 80vh; /* Limits modal height */
+  overflow-y: auto; /* Adds scroll if needed */
+  padding: 20px; /* Reduced padding */
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px; /* Reduced gap between elements */
+}
+
+.form-group {
+  margin-bottom: 12px; /* Reduced spacing */
+}
+
+.form-group label {
+  margin-bottom: 4px; /* Tighter label spacing */
+  font-size: 13px; /* Slightly smaller labels */
+}
+
+.form-group input,
+.form-group select {
+  padding: 10px 12px; /* Slightly smaller inputs */
+  font-size: 14px;
+}
+
+/* Compact driver fields */
+#driver-fields {
+  margin-top: 12px;
+  padding-top: 12px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+#driver-fields .form-group {
+  margin-bottom: 0;
+}
+
+/* Submit button */
+.submit-button {
+  padding: 10px;
+  margin-top: 8px;
+}
+
+/* Header styling */
+.auth-form h2 {
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+
+/* Footer text */
+.form-footer {
+  margin-top: 12px;
+  font-size: 13px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  #driver-fields {
+    grid-template-columns: 1fr;
+  }
+  
+  .modal-content {
+    padding: 15px;
+  }
+}

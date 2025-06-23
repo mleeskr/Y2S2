@@ -1,0 +1,1892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="driver.css">
+    <title>FamilyRide - ride anywhere safely</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Landing Page -->
+    <div id="landing-page">
+        <header>
+            <div class="container header-content">
+                <div class="logo">FamilyRide</div>
+                <nav>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#about">About</a></li>
+                    </ul>
+                </nav>
+                <div class="auth-buttons">
+                    <button id="login-btn">Login</button>
+                    <button id="register-btn">Register</button>
+                </div>
+            </div>
+        </header>
+        
+        <section class="hero">
+            <div class="container">
+                <h1>Ride with Convenience</h1>
+                <p>Book a ride in seconds and get to your destination safely and comfortably with your family at your fingertips.</p>
+                <button class="cta-button" id="book-ride-btn">Book a Ride Now</button>
+            </div>
+        </section>
+        
+        <section class="container" id="features">
+            <h2 style="text-align: center; margin-bottom: 40px; color: var(--primary-color);">Why Choose Us</h2>
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Quick Pickup</h3>
+                    <p>Our drivers are always nearby to pick you up in seconds, not days.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Safe Rides</h3>
+                    <p>All our drivers are verified and trained to ensure their own safety.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-wallet"></i>
+                    </div>
+                    <h3>Affordable Prices</h3>
+                    <p>Get competitive prices with compromising on quality.</p>
+                </div>
+            </div>
+        </section>
+        
+        <footer>
+            <div class="container footer-content">
+                <div class="logo">FamilyRide</div>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Contact Us</a>
+                </div>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+                <div class="copyright">
+                    &copy; 2055 FamilyRide. All rights not really reserved.
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+    <!-- Login  -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <div class="auth-form">
+                <h2>Login</h2>
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" required>
+                    </div>
+                    <button type="submit" class="submit-button">Login</button>
+                    <div class="form-footer">
+                        Don't have an account? <a href="#" id="show-register">Register</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Register -->
+    <div id="register-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <div class="auth-form">
+                <h2>Register</h2>
+                <form id="register-form">
+                    <div class="form-group">
+                        <label for="register-name">Full Name</label>
+                        <input type="text" id="register-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-email">Email</label>
+                        <input type="email" id="register-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-password">Password</label>
+                        <input type="password" id="register-password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-role">I want to register as:</label>
+                        <select id="register-role" required>
+                            <option value="">Select Role</option>
+                            <option value="user">Passenger</option>
+                            <option value="driver">Driver</option>
+                        </select>
+                    </div>
+                    <div id="driver-fields" style="display: none;">
+                        <div class="form-group">
+                            <label for="license-number">License Number</label>
+                            <input type="text" id="license-number">
+                        </div>
+                        <div class="form-group">
+                            <label for="vehicle-model">Vehicle Model</label>
+                            <input type="text" id="vehicle-model">
+                        </div>
+                        <div class="form-group">
+                            <label for="vehicle-color">Vehicle Color</label>
+                            <input type="text" id="vehicle-color">
+                        </div>
+                        <div class="form-group">
+                            <label for="vehicle-plate">License Plate</label>
+                            <input type="text" id="vehicle-plate">
+                        </div>
+                    </div>
+                    <button type="submit" class="submit-button">Register</button>
+                    <div class="form-footer">
+                        Already have an account? <a href="#" id="show-login">Login</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- User Dashboard -->
+    <div id="user-dashboard" style="display: none;">
+        <div class="dashboard">
+            <div class="sidebar">
+                <div class="sidebar-header">
+                    <div style="width: 80px; height: 80px; background-color: #fff; border-radius: 50%; margin: 0 auto; display: flex; justify-content: center; align-items: center;">
+                        <i class="fas fa-user" style="font-size: 36px; color: var(--primary-color);"></i>
+                    </div>
+                    <h3 id="user-name"></h3>
+                    <p id="user-email"></p>
+                </div>
+                <ul class="sidebar-menu">
+                    <li><a href="#" class="active" data-section="dashboard"><i class="fas fa-home"></i> Dashboard</a></li>
+                    <li><a href="#" data-section="book-ride"><i class="fas fa-car"></i> Book a Ride</a></li>
+                    <li><a href="#" data-section="ride-history"><i class="fas fa-history"></i> Ongoing Rides</a></li>
+                    <li><a href="#" data-section="profile"><i class="fas fa-user"></i> Profile</a></li>
+                    <li><a href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                </ul>
+            </div>
+            <div class="main-content">
+                <div id="dashboard-section">
+                    <div class="dashboard-header">
+                        <h2>User Dashboard</h2>
+                        <div id="user-balance" style="background-color: var(--primary-color); color: white; padding: 8px 16px; border-radius: 4px;">
+                            <!-- User balance will be set dynamically -->
+                        </div>
+                    </div>
+                    
+                    <div class="stats-cards">
+                        <div class="stat-card">
+                            <h3>Total Rides</h3>
+                            <div class="value">15</div>
+                        </div>
+                        <div class="stat-card">
+                            <h3>This Month</h3>
+                            <div class="value">3</div>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Total Spent</h3>
+                            <div class="value">$245</div>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Average Rating</h3>
+                            <div class="value">4.8</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Recent Rides</h3>
+                            <button class="btn btn-primary">View All</button>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Driver</th>
+                                    <th>From</th>
+                                    <th>To</th>
+                                    <th>Fare</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dashboard-table-body">
+                                <!-- Completed rides will be dynamically inserted here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div id="book-ride-section" style="display: none;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Book a Ride</h3>
+                        </div>
+                        <div class="map-container">
+                            <!-- Map would go here -->
+                            <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
+                                <i class="fas fa-map-marker-alt" style="font-size: 48px; color: var(--primary-color);"></i>
+                            </div>
+                        </div>
+                        <form class="booking-form">
+                            <div class="form-group">
+                                <label for="pickup-location">Pickup Location</label>
+                                <input type="text" id="pickup-location" placeholder="Enter pickup address">
+                            </div>
+                            <div class="form-group">
+                                <label for="destination">Destination</label>
+                                <input type="text" id="destination" placeholder="Enter destination address">
+                            </div>
+                            <div class="form-group">
+                                <label for="ride-type">Ride Type</label>
+                                <select id="ride-type">
+                                    <option value="standard">Standard</option>
+                                    <option value="premium">Premium</option>
+                                    <option value="xl">XL</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">Request Ride</button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div id="ride-history-section" style="display: none;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Ongoing ride</h3>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Driver</th>
+                                    <th>Driver ID</th>
+                                    <th>Vehicle</th>
+                                    <th>Vehicle Color</th>
+                                    <th>Vehicle Plate</th>
+                                    <th>From</th>
+                                    <th>To</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody id="ride-history-table-body">
+                                <!-- Ride history will be dynamically inserted here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div id="profile-section" style="display: none;">
+                    <form id="user-profile-form">
+                        <div class="form-group">
+                            <label for="user-profile-name">Name</label>
+                            <input type="text" id="user-profile-name" placeholder="Leave blank to keep current">
+                        </div>
+                        <div class="form-group">
+                            <label for="user-profile-email">Email</label>
+                            <input type="email" id="user-profile-email" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="user-profile-password">New Password</label>
+                            <input type="password" id="user-profile-password" placeholder="Leave blank to keep current">
+                        </div>
+                        <div class="form-group">
+                            <label for="user-profile-confirm-password">Confirm Password</label>
+                            <input type="password" id="user-profile-confirm-password" placeholder="Confirm new password">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Update Profile</button>
+                        <button id="delete-account-btn" class="btn btn-danger">Delete Account</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  
+   
+    <!-- driver Dashboard -->
+    <div id="driver-dashboard" style="display: none;">
+        <div class="dashboard">
+            <div class="sidebar">
+                <div class="sidebar-header">
+                    <div style="width: 80px; height: 80px; background-color: #fff; border-radius: 50%; margin: 0 auto; display: flex; justify-content: center; align-items: center;">
+                        <i class="fas fa-user" style="font-size: 36px; color: var(--primary-color);"></i>
+                    </div>
+                    <h3 id="driver-name"></h3>
+                    <p id="driver-email"></p>
+                    <div style="margin-top: 10px;">
+                        <span style="background-color: var(--accent-color); color: var(--text-dark); padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold;">
+                            <i class="fas fa-star" style="margin-right: 5px;"></i>4.8
+                        </span>
+                    </div>
+                </div>
+                <ul class="sidebar-menu">
+                    <li><a href="#" class="active" data-section="driver-dashboard"><i class="fas fa-home"></i> Dashboard</a></li>
+                    <li><a href="#" data-section="available-rides"><i class="fas fa-car"></i> Available Rides</a></li>
+                    <li><a href="#" data-section="current-ride"><i class="fas fa-road"></i> Current Ride</a></li>
+                    <li><a href="#" data-section="driver-profile"><i class="fas fa-user"></i> Profile</a></li>
+                    <li><a href="#" id="driver-logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                </ul>
+            </div>
+            <div class="main-content">
+                <div class="dashboard-header">
+                    <h2>Driver Dashboard</h2>
+                    <div style="display: flex; align-items: center;">
+                        <div id="driver-status" style="background-color: #28a745; color: white; padding: 8px 16px; border-radius: 4px; margin-right: 15px;">
+                            <i class="fas fa-circle" style="font-size: 10px; margin-right: 5px;"></i> Online
+                        </div>
+                        <button id="toggle-availability" class="btn btn-primary">Go Offline</button>
+                    </div>
+                </div>
+                
+               <div id="driver-dashboard-section">
+      <div class="stats-cards">
+        <div class="stat-card">
+            <h3>Total Earnings</h3>
+            <div class="value" id="total-earnings">$0.00</div>
+        </div>
+        <div class="stat-card">
+            <h3>Total Rides</h3>
+            <div class="value" id="total-rides">0</div>
+        </div>
+        <div class="stat-card">
+            <h3>Average Rating</h3>
+            <div class="value" id="average-rating">0.0</div>
+        </div>
+     </div>
+
+                <div class="card">
+        <h3>Recent Rides</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Passenger</th>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Fare</th>
+                    <th>Rating</th>
+                </tr>
+            </thead>
+            <tbody id="recent-rides">
+                <!-- Recent rides will be dynamically inserted here -->
+            </tbody>
+        </table>
+                </div>
+      </div>
+                
+                <div id="available-rides-section" style="display: none;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Available Rides</h3>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Passenger</th>
+                                    <th>From</th>
+                                    <th>To</th>
+                                    <th>Distance</th>
+                                    <th>Estimated Fare</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="available-rides-table-body">
+                                <!-- Available rides will be dynamically inserted here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div id="current-ride-section" style="display: none;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Current Ride</h3>
+                        </div>
+                        <div style="padding: 20px;">
+                            <div class="map-container">
+                                <!-- Map would go here -->
+                                <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
+                                    <i class="fas fa-map-marker-alt" style="font-size: 48px; color: var(--primary-color);"></i>
+                                </div>
+                            </div>
+                            
+                            <div style="margin-top: 20px;">
+                                <h4 style="margin-bottom: 15px; color: var(--primary-color);">Ride Details</h4>
+                                <div class="ride-details">
+                                    <!-- Ride details will be dynamically inserted here -->
+                                </div>
+                                
+                                <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+                                   
+                                  
+                                   <button class="btn btn btn-primary">Complete Ride</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                 <div id="profile-section" style="display: none;">
+                     <form id="driver-profile-form">
+    <div class="form-group">
+      <label for="driver-profile-name">Name</label>
+      <input type="text" id="driver-profile-name" placeholder="Leave blank to keep current">
+    </div>
+    <div class="form-group">
+      <label for="driver-profile-email">Email</label>
+      <input type="email" id="driver-profile-email" disabled>
+    </div>
+    <div class="form-group">
+      <label for="driver-profile-password">New Password</label>
+      <input type="password" id="driver-profile-password" 
+             placeholder="Leave blank to keep current">
+    </div>
+    <div class="form-group">
+      <label for="driver-profile-confirm-password">Confirm Password</label>
+      <input type="password" id="driver-profile-confirm-password" 
+             placeholder="Confirm new password">
+    </div>
+    <button type="submit" class="btn btn-primary">Update Profile</button>
+    <button id="delete-account-btn" class="btn btn-danger">Delete Account</button>
+  </form>
+            </div>
+    
+    </div>
+   </div> 
+    </div>
+     
+    
+    <!-- Admin Dashboard -->
+     <div id="admin-dashboard" style="display: none;">
+        <div class="dashboard">
+            <div class="sidebar">
+                <div class="sidebar-header">
+                    <div style="width: 80px; height: 80px; background-color: #fff; border-radius: 50%; margin: 0 auto; display: flex; justify-content: center; align-items: center;">
+                        <i class="fas fa-user-shield" style="font-size: 36px; color: var(--primary-color);"></i>
+                    </div>
+                    <h3>Admin</h3>
+                    <p id="admin-email"></p>
+                </div>
+                <ul class="sidebar-menu">
+                    <li><a href="#" data-section="manage-users"><i class="fas fa-users"></i> Manage Users</a></li>
+                    <li><a href="#" data-section="manage-drivers"><i class="fas fa-id-card"></i> Manage Drivers</a></li>
+                    <li><a href="#" data-section="manage-rides"><i class="fas fa-car"></i> Manage Rides</a></li>
+                    <li><a href="#" data-section="admin-settings"><i class="fas fa-cog"></i> Settings</a></li>
+                    <li><a href="#" id="admin-logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                </ul>
+            </div>
+            <div class="main-content">
+                <div class="dashboard-header">
+                    <h2>Admin Dashboard</h2>
+                    <div style="display: flex; align-items: center;">
+                        <div style="margin-right: 15px;">
+                            <input type="text" id="search-input" placeholder="Search..." style="padding: 8px; border-radius: 4px; border: 1px solid #ddd;">
+                        </div>
+                        <button class="btn btn-primary" id="search-btn">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="manage-users-section" style="display: none;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Manage Users</h3>
+                            <div>
+                                <input type="text" id="user-search" placeholder="Search users..." style="padding: 8px; border-radius: 4px; border: 1px solid #ddd; margin-right: 10px;">
+                                <button id="add-user-btn" class="btn btn-primary">Add User</button>
+                            </div>
+                        </div>
+                        <table id="users-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Joined</th>
+                                    <th>Rides</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="users-table-body">
+                                <!-- Users will be loaded here dynamically -->
+                            </tbody>
+                        </table>
+                        <div class="pagination-container" style="padding: 15px; display: flex; justify-content: space-between; align-items: center;">
+                            <div id="pagination-info">Loading users...</div>
+                            <div id="pagination-controls">
+                                <button class="btn btn-sm btn-secondary prev-btn">Previous</button>
+                                <div id="page-numbers" style="display: inline-block;"></div>
+                                <button class="btn btn-sm btn-secondary next-btn">Next</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="manage-drivers-section" style="display: none;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Manage Drivers</h3>
+                            <div>
+                                <select id="driver-status-filter" style="padding: 8px; border-radius: 4px; margin-right: 10px;">
+                                    <option value="all">All Drivers</option>
+                                    <option value="approved">Approved</option>
+                                    <option value="pending">Pending</option>
+                                    <option value="suspended">Suspended</option>
+                                </select>
+                                <input type="text" id="driver-search" placeholder="Search drivers..." style="padding: 8px; border-radius: 4px; border: 1px solid #ddd; margin-right: 10px;">
+                                <button id="add-driver-btn" class="btn btn-primary">Add Driver</button>
+                            </div>
+                        </div>
+                        <table id="drivers-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Vehicle</th>
+                                    <th>Status</th>
+                                    <th>Rating</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="drivers-table-body">
+                                <!-- Drivers will be loaded here dynamically -->
+                            </tbody>
+                        </table>
+                        <div style="padding: 15px; display: flex; justify-content: space-between; align-items: center;">
+                            <div id="drivers-pagination-info">Loading drivers...</div>
+                            <div id="drivers-pagination-controls">
+                                <button class="btn btn-sm btn-secondary prev-btn">Previous</button>
+                                <div id="drivers-page-numbers" style="display: inline-block;"></div>
+                                <button class="btn btn-sm btn-secondary next-btn">Next</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="manage-rides-section" style="display: none;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Manage Rides</h3>
+                            <div>
+                                <select id="ride-status-filter" style="padding: 8px; border-radius: 4px; margin-right: 10px;">
+                                    <option value="all">All Rides</option>
+                                    <option value="requested">Requested</option>
+                                    <option value="in-progress">In Progress</option>
+                                    <option value="completed">Completed</option>
+                                    <option value="cancelled">Cancelled</option>
+                                </select>
+                                <input type="text" id="ride-search" placeholder="Search rides..." style="padding: 8px; border-radius: 4px; border: 1px solid #ddd; margin-right: 10px;">
+                                <button id="filter-rides-btn" class="btn btn-primary">Filter</button>
+                            </div>
+                        </div>
+                        <table id="rides-table">
+                            <thead>
+                                <tr>
+                                    <th>Ride ID</th>
+                                    <th>Passenger</th>
+                                    <th>Driver</th>
+                                    <th>From</th>
+                                    <th>To</th>
+                                    <th>Fare</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rides-table-body">
+                                <!-- Rides will be loaded here dynamically -->
+                            </tbody>
+                        </table>
+                        <div style="padding: 15px; display: flex; justify-content: space-between; align-items: center;">
+                            <div id="rides-pagination-info">Loading rides...</div>
+                            <div id="rides-pagination-controls">
+                                <button class="btn btn-sm btn-secondary prev-btn">Previous</button>
+                                <div id="rides-page-numbers" style="display: inline-block;"></div>
+                                <button class="btn btn-sm btn-secondary next-btn">Next</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="admin-settings-section" style="display: none;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Settings</h3>
+                        </div>
+                        <div style="padding: 20px;">
+                            <form id="settings-form">
+                                <div style="margin-bottom: 30px;">
+                                    <h4 style="color: var(--primary-color); margin-bottom: 15px;">System Settings</h4>
+                                    <div class="form-group">
+                                        <label for="base-fare">Base Fare ($)</label>
+                                        <input type="number" id="base-fare" value="2.50" step="0.01">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="per-mile">Per Mile Rate ($)</label>
+                                        <input type="number" id="per-mile" value="1.50" step="0.01">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="per-minute">Per Minute Rate ($)</label>
+                                        <input type="number" id="per-minute" value="0.25" step="0.01">
+                                    </div>
+                                </div>
+                                
+                                <div style="margin-bottom: 30px;">
+                                    <h4 style="color: var(--primary-color); margin-bottom: 15px;">Commission Rates</h4>
+                                    <div class="form-group">
+                                        <label for="driver-commission">Driver Commission (%)</label>
+                                        <input type="number" id="driver-commission" value="80">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="company-commission">Company Commission (%)</label>
+                                        <input type="number" id="company-commission" value="20">
+                                    </div>
+                                </div>
+                                
+                                <div style="margin-bottom: 30px;">
+                                    <h4 style="color: var(--primary-color); margin-bottom: 15px;">Notifications</h4>
+                                    <div class="form-group" style="display: flex; align-items: center;">
+                                        <input type="checkbox" id="email-notifications" checked style="margin-right: 10px;">
+                                        <label for="email-notifications">Enable Email Notifications</label>
+                                    </div>
+                                    <div class="form-group" style="display: flex; align-items: center;">
+                                        <input type="checkbox" id="sms-notifications" style="margin-right: 10px;">
+                                        <label for="sms-notifications">Enable SMS Notifications</label>
+                                    </div>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-primary">Save Settings</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   <script>
+    // DOM Elements
+    const landingPage = document.getElementById('landing-page');
+    const loginBtn = document.getElementById('login-btn');
+    const registerBtn = document.getElementById('register-btn');
+    const loginModal = document.getElementById('login-modal');
+    const registerModal = document.getElementById('register-modal');
+    const closeButtons = document.querySelectorAll('.close-button');
+    const showRegister = document.getElementById('show-register');
+    const showLogin = document.getElementById('show-login');
+    const registerRole = document.getElementById('register-role');
+    const driverFields = document.getElementById('driver-fields');
+     const usersTableBody = document.getElementById('users-table-body');
+    const userSearch = document.getElementById('user-search');
+    const addUserBtn = document.getElementById('add-user-btn');
+    const userModal = document.getElementById('user-modal');
+    const userForm = document.getElementById('user-form');
+    const modalTitle = document.getElementById('modal-title');
+    const closeModal = document.querySelector('.close-modal');
+    const paginationInfo = document.getElementById('pagination-info');
+    const pageNumbersContainer = document.getElementById('page-numbers');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+
+    // Dashboard elements
+    const userDashboard = document.getElementById('user-dashboard');
+    const driverDashboard = document.getElementById('driver-dashboard');
+    const adminDashboard = document.getElementById('admin-dashboard');
+    const logoutBtn = document.getElementById('logout-btn');
+    const driverLogoutBtn = document.getElementById('driver-logout-btn');
+    const adminLogoutBtn = document.getElementById('admin-logout-btn');
+    
+    // Sidebar navigation
+    const sidebarLinks = document.querySelectorAll('.sidebar-menu a[data-section]');
+    
+    // API Base URL
+    const API_BASE_URL = 'http://localhost:3000';
+    
+    // Current user data
+    let currentUser = null;
+
+    // Initialize the application
+    document.addEventListener('DOMContentLoaded', () => {
+        checkAuthStatus();
+    });
+    
+
+    // Check if user is authenticated
+    function checkAuthStatus() {
+        const userData = localStorage.getItem('user');
+        if (userData) {
+            currentUser = JSON.parse(userData);
+            showDashboard(currentUser.role);
+        }
+    }
+
+    // Show modal functions
+    function showModal(modal) {
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+    
+    function hideModal(modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+
+    // Show appropriate dashboard based on user role
+    function showDashboard(role) {
+        landingPage.style.display = 'none';
+        
+        switch(role) {
+            case 'user':
+                userDashboard.style.display = 'block';
+                driverDashboard.style.display = 'none';
+                adminDashboard.style.display = 'none';
+                loadUserDashboard();
+                break;
+            case 'driver':
+                userDashboard.style.display = 'none';
+                driverDashboard.style.display = 'block';
+                adminDashboard.style.display = 'none';
+                loadDriverDashboard();
+                break;
+            case 'admin':
+                userDashboard.style.display = 'none';
+                driverDashboard.style.display = 'none';
+                adminDashboard.style.display = 'block';
+                loadAdminDashboard();
+                break;
+            default:
+                landingPage.style.display = 'block';
+                userDashboard.style.display = 'none';
+                driverDashboard.style.display = 'none';
+                adminDashboard.style.display = 'none';
+        }
+    }
+
+    // login form submission
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const email = document.getElementById('login-email').value;
+        const password = document.getElementById('login-password').value;
+        
+        try {
+            const response = await fetch(`${API_BASE_URL}/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, password })
+            });
+            
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'Login failed');
+            }
+        
+            const userData = await response.json();
+            
+            // Store user data and token
+            localStorage.setItem('user', JSON.stringify(userData));
+            currentUser = userData;
+            
+            // Hide modal and show dashboard
+            hideModal(loginModal);
+            showDashboard(userData.role);
+            
+        } catch (error) {
+            alert(error.message);
+            console.error('Login error:', error);
+        }
+    });
+
+    // registration form submission
+    document.getElementById('register-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const name = document.getElementById('register-name').value;
+        const email = document.getElementById('register-email').value;
+        const password = document.getElementById('register-password').value;
+        const role = document.getElementById('register-role').value;
+        
+        const userData = {
+            name,
+            email,
+            password,
+            role,
+            
+        };
+   if (role === 'driver') {
+    // Make sure driver fields are visible before accessing them
+    driverFields.style.display = 'block';
+    
+    // Now get the values
+    userData.licenseNumber = document.getElementById('license-number').value.trim();
+    userData.vehicleModel = document.getElementById('vehicle-model').value.trim();
+    userData.vehicleColor = document.getElementById('vehicle-color').value.trim();
+    userData.vehiclePlate = document.getElementById('vehicle-plate').value.trim();
+    
+    console.log("Vehicle data:", {
+        licenseNumber: userData.licenseNumber,
+        vehicleModel: userData.vehicleModel,
+        vehicleColor: userData.vehicleColor,
+        vehiclePlate: userData.vehiclePlate
+    });
+}
+        try {
+            const response = await fetch(`${API_BASE_URL}/register`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(userData)
+            });
+            
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'Registration failed');
+            }
+            
+            const registeredUser = await response.json();
+            
+            // Store user data and token
+            localStorage.setItem('user', JSON.stringify(registeredUser));
+            currentUser = registeredUser;
+            
+            // Hide modal and show dashboard
+            hideModal(registerModal);
+            
+            if (role === 'driver' && !registeredUser.isApproved) {
+                alert('Your driver account is pending approval. You will be notified once approved.');
+              
+            } else {
+              
+            }
+            
+        } catch (error) {
+            alert(error.message);
+            console.error('Registration error:', error);
+        }
+    });
+
+    // Toggle driver fields based on role selection
+    registerRole.addEventListener('change', (e) => {
+        driverFields.style.display = e.target.value === 'driver' ? 'block' : 'none';
+    });
+
+    // Handle logout
+    function handleLogout() {
+        localStorage.removeItem('user');
+        currentUser = null;
+        landingPage.style.display = 'block';
+        userDashboard.style.display = 'none';
+        driverDashboard.style.display = 'none';
+        adminDashboard.style.display = 'none';
+    }
+
+    // Add logout event listeners
+    if (logoutBtn) logoutBtn.addEventListener('click', handleLogout);
+    if (driverLogoutBtn) driverLogoutBtn.addEventListener('click', handleLogout);
+    if (adminLogoutBtn) adminLogoutBtn.addEventListener('click', handleLogout);
+
+    // Sidebar navigation
+    sidebarLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            // Remove active class from all links
+            sidebarLinks.forEach(l => l.classList.remove('active'));
+            
+            // Add active class to clicked link
+            link.classList.add('active');
+            
+            // Show the corresponding section
+            const sectionId = `${link.dataset.section}-section`;
+            document.querySelectorAll('.main-content > div[id$="-section"]').forEach(div => {
+                div.style.display = 'none';
+            });
+            
+            document.getElementById(sectionId).style.display = 'block';
+        });
+    });
+
+    // Event listeners for modal buttons
+    loginBtn.addEventListener('click', () => showModal(loginModal));
+    registerBtn.addEventListener('click', () => showModal(registerModal));
+    
+    closeButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const modal = this.closest('.modal');
+            hideModal(modal);
+        });
+    });
+    
+    showRegister.addEventListener('click', (e) => {
+        e.preventDefault();
+        hideModal(loginModal);
+        showModal(registerModal);
+    });
+    
+    showLogin.addEventListener('click', (e) => {
+        e.preventDefault();
+        hideModal(registerModal);
+        showModal(loginModal);
+    });
+ 
+ 
+ 
+    //################################################################################################################################################
+    //user management functions
+    // Load user dashboard data
+    async function loadUserDashboard() {    
+        try {
+            const response = await fetch(`${API_BASE_URL}/accounts`, {
+                headers: {
+                    'Authorization': `Bearer ${currentUser.token}`
+                }
+            });
+            
+            if (!response.ok) {
+               
+                throw new Error('Failed to load user data');
+            }
+            
+            const rides = await response.json();
+           
+            // Update UI with user data
+            document.getElementById('user-name').textContent = rides.name || currentUser.name;
+            document.getElementById('user-email').textContent = rides.email || currentUser.email;
+        } catch (error) {
+            alert(error.message);
+            console.error('Error loading ride history:', error);
+        }
+    };
+
+    // Book a ride functionality
+    document.querySelector('.booking-form')?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const pickupLocation = document.getElementById('pickup-location').value;
+        const destination = document.getElementById('destination').value;
+        const rideType = document.getElementById('ride-type').value;
+        
+        try {
+            const response = await fetch(`${API_BASE_URL}/user/get-ride`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${currentUser.token}`
+                },
+                body: JSON.stringify({
+                    pickupLocation,
+                    destination,
+                    rideType
+                })
+            });
+            
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'Failed to book ride');
+            }
+            
+            const rideData = await response.json();
+            alert('Ride booked successfully!');
+            
+            // Update UI with new ride
+            // You would implement this based on your API response structure
+            
+        } catch (error) {
+            alert(error.message);
+            console.error('Error booking ride:', error);
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+
+    // Selectors
+    const userDashboard = document.querySelector('#user-dashboard');
+    const logoutBtn = document.querySelector('#logout-btn');
+    const sidebarLinks = document.querySelectorAll('.sidebar-menu a');
+    const bookRideSection = document.querySelector('#book-ride-section');
+    const rideHistorySection = document.querySelector('#ride-history-section');
+    const profileSection = document.querySelector('#user-profile-section');
+    const bookingForm = document.querySelector('.booking-form');
+    const pickupLocationInput = document.querySelector('#pickup-location');
+    const destinationInput = document.querySelector('#destination');
+    const rideTypeSelect = document.querySelector('#ride-type');
+    const profileNameInput = document.querySelector('#user-profile-name');
+    const profileEmailInput = document.querySelector('#user-profile-email');
+    const profilePasswordInput = document.querySelector('#user-profile-password');
+    const profileUpdateBtn = document.querySelector('#user-profile-section button[type="submit"]');
+    const rideHistoryTableBody = document.querySelector('#ride-history-section table tbody');
+    const dashboardTableBody = document.querySelector('#dashboard-section table tbody');
+
+    // Show a specific section
+   function showSection(sectionId) {
+    document.querySelectorAll('.main-content > div').forEach(section => {
+      section.style.display = 'none';
+    });
+    document.querySelector(`#${sectionId}-section`).style.display = 'block';
+    sidebarLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('data-section') === sectionId) {
+        link.classList.add('active');
+      }
+    });
+  }
+
+    // Sidebar links
+    sidebarLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const section = link.getAttribute('data-section');
+            console.log(`Link clicked for section: ${section}`);
+            showSection(section);
+        });
+    });
+
+    // Logout button
+    logoutBtn.addEventListener('click', () => {
+        console.log('Logout button clicked');
+        localStorage.removeItem('user');
+        window.location.href = '/login'; // Redirect to login page
+    });
+
+    // Fetch rides 
+    async function fetchCompletedRides() {
+       
+        try {
+            const response = await fetch(`${API_BASE_URL}/user/check-ride`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${currentUser.token}`
+                }
+            });
+            const rides = await response.json();
+            console.log('Completed rides:', rides); 
+            displayCompletedRides(rides);
+        } catch (error) {
+            console.error('Error fetching completed rides:', error);
+        }
+    }
+
+    //display completed rides 
+    function displayCompletedRides(rides) {
+        if (!rides || rides.length === 0) {
+            console.log('No completed rides to display');
+            return;
+        }
+        dashboardTableBody.innerHTML = '';
+        rides.forEach(ride => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${new Date(ride.createdAt).toLocaleDateString()}</td>
+                <td>${ride.driverName}</td>
+                <td>${ride.pickupLocation}</td>
+                <td>${ride.destination}</td>
+                <td>$${ride.fare}</td>
+                <td><span class="status completed">Completed</span></td>
+            `;
+            dashboardTableBody.appendChild(row);
+        });
+    }
+
+    
+    async function fetchongoing() {
+  try {
+    // 1. Fetch ongoing ride
+    const rideResponse = await fetch(`${API_BASE_URL}/user/ongoing-ride`, {
+      headers: { 'Authorization': `Bearer ${currentUser.token}` }
+    });
+    const ride = await rideResponse.json();
+  
+    // 2. Check if driverId exists (as a string)
+    if (!ride ) {
+      rideHistoryTableBody.innerHTML = '<tr><td colspan="8">No active ride</td></tr>';
+      return;
+    }
+
+    // 3. Fetch driver details (pass ride.driverId as string)
+    const driverResponse = await fetch(
+      `${API_BASE_URL}/user/driver-details/${ride.driverId}`,
+      { headers: { 'Authorization': `Bearer ${currentUser.token}` } }
+    );
+    const driver = await driverResponse.json();
+
+    // 4. Display data
+    displayongoing(ride, driver);
+
+  } catch (error) {
+    console.error('Error:', error);
+    rideHistoryTableBody.innerHTML = '<tr><td colspan="8">Error loading ride data</td></tr>';
+  }
+}
+// Function to display ongoing ride
+function displayongoing(ride, driver) {
+    rideHistoryTableBody.innerHTML = '';
+    
+    const row = document.createElement('tr');
+    row.innerHTML = `
+        <td>${ride.createdAt ? new Date(ride.createdAt).toLocaleDateString() : 'N/A'}</td>
+        <td>${ride.driverName || 'N/A'}</td>
+        <td>${ride.driverId ? ride.driverId : 'N/A'}</td>
+        <td>${driver.vehicleModel || 'N/A'}</td>
+        <td>${driver.vehicleColor || 'N/A'}</td>
+        <td>${driver.vehiclePlate || 'N/A'}</td>
+        <td>${ride.pickupLocation || 'N/A'}</td>
+        <td>${ride.destination || 'N/A'}</td>
+    `;
+    rideHistoryTableBody.appendChild(row);
+}
+
+    // Event listener for profile update form submission
+   document.getElementById('user-profile-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById('user-profile-name').value.trim();
+    const password = document.getElementById('user-profile-password').value;
+    const confirmPassword = document.getElementById('user-profile-confirm-password').value;
+
+    if (password && password !== confirmPassword) {
+        alert('Passwords do not match');
+        return;
+    }
+
+    try {
+        const updateData = { name };
+        if (password) updateData.password = password;
+
+        const response = await fetch(`${API_BASE_URL}/update/${currentUser._id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${currentUser.token}`
+            },
+            body: JSON.stringify(updateData)
+        });
+
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.error || 'Update failed');
+        }
+
+        const updatedUser = { ...currentUser, name };
+        localStorage.setItem('user', JSON.stringify(updatedUser));
+        currentUser = updatedUser;
+
+        alert('Profile updated successfully!');
+    } catch (error) {
+        console.error('Update error:', error);
+        alert(`Error: ${error.message}`);
+    }
+});
+
+document.getElementById('delete-account-btn').addEventListener('click', async () => {
+    if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+        try {
+            const response = await fetch(`${API_BASE_URL}/delete-account/${currentUser._id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${currentUser.token}`
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            alert('Your account has been deleted.');
+            window.location.href = '/login.html';
+        } catch (error) {
+            console.error('Error deleting account:', error);
+            alert('Failed to delete account: ' + error.message);
+        }
+    }
+});
+    
+    fetchCompletedRides();
+    fetchongoing();
+});
+
+
+
+
+
+
+
+
+    //##############################################################################################################################################
+    // Load driver dashboard data
+    async function loadDriverDashboard() {
+      
+        try {
+            const response = await fetch(`${API_BASE_URL}/accounts`, {
+                headers: {
+                    'Authorization': `Bearer ${currentUser.token}`
+                }
+            });
+            
+            if (!response.ok) {
+                throw new Error('Failed to load driver data');
+            }
+            
+            const data = await response.json();
+            
+            // Update UI with driver data
+            document.getElementById('driver-name').textContent = data.name||currentUser.name;
+            document.getElementById('driver-email').textContent = data.email||currentUser.email;
+            
+            // Update stats, available rides, etc.
+            // You would implement this based on your API response structure
+            
+        } catch (error) {
+            console.error('Error loading driver dashboard:', error);
+        }
+    }
+
+
+
+document.addEventListener('DOMContentLoaded', async () => {
+    try {
+        const response = await fetch(`${API_BASE_URL}/driver/stats`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${currentUser.token}` // Assuming token is stored in localStorage
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        // Update stats cards
+        document.getElementById('total-earnings').textContent = `$${data.totalEarnings.toFixed(2)}`;
+        document.getElementById('total-rides').textContent = data.totalRides;
+        document.getElementById('average-rating').textContent = data.averageRating.toFixed(1);
+
+        // Insert recent rides into the table
+        const tbody = document.getElementById('recent-rides');
+        tbody.innerHTML = ''; // Clear existing rows
+
+        data.recentRides.forEach(ride => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${new Date(ride.completedAt).toLocaleDateString()}</td>
+                <td>${ride.userName}</td>
+                <td>${ride.pickupLocation}</td>
+                <td>${ride.destination}</td>
+                <td>$${ride.fare}</td>
+                <td>${ride.rating}</td>
+            `;
+            tbody.appendChild(row);
+        });
+    } catch (error) {
+        console.error('Error fetching driver stats:', error);
+        alert('Failed to fetch stats: ' + error.message);
+    }
+});
+
+//fetch rides,complete ride, and update profile
+document.addEventListener('DOMContentLoaded', () => {
+
+  // Selectors
+  const driverDashboard = document.querySelector('#driver-dashboard');
+  const driverLogoutBtn = document.querySelector('#driver-logout-btn');
+  const sidebarLinks = document.querySelectorAll('.sidebar-menu a');
+  const toggleAvailabilityBtn = document.querySelector('#toggle-availability');
+  const availableRidesSection = document.querySelector('#available-rides-section');
+  const currentRideSection = document.querySelector('#current-ride-section');
+  const earningsSection = document.querySelector('#earnings-section');
+  const driverProfileSection = document.querySelector('#driver-profile-section');
+  const driverProfileNameInput = document.querySelector('#driver-profile-name');
+  const driverProfileEmailInput = document.querySelector('#driver-profile-email');
+  const driverProfilePhoneInput = document.querySelector('#driver-profile-phone');
+  const driverProfileLicenseInput = document.querySelector('#driver-profile-license');
+  const driverProfileVehicleInput = document.querySelector('#driver-profile-vehicle');
+  const driverProfileColorInput = document.querySelector('#driver-profile-color');
+  const driverProfilePlateInput = document.querySelector('#driver-profile-plate');
+  const driverProfilePasswordInput = document.querySelector('#driver-profile-password');
+  const driverProfileUpdateBtn = document.querySelector('#driver-profile-section button[type="submit"]');
+ const availableRidesTableBody = document.getElementById('available-rides-table-body');
+  const currentRideDetails = document.querySelector('#current-ride-section .ride-details');
+  const completeRideBtn = document.querySelector('#current-ride-section .btn-primary');
+  
+  // Function to show a specific section
+  function showSection(sectionId) {
+    document.querySelectorAll('.main-content > div').forEach(section => {
+      section.style.display = 'none';
+    });
+    document.querySelector(`#${sectionId}-section`).style.display = 'block';
+    sidebarLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('data-section') === sectionId) {
+        link.classList.add('active');
+      }
+    });
+  }
+
+  // sidebar links
+  sidebarLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const section = link.getAttribute('data-section');
+      showSection(section);
+    });
+  });
+
+  // logout button
+  driverLogoutBtn.addEventListener('click', () => {
+    // Implement logout functionality here
+    console.log('Logout button clicked');
+  });
+
+  // toggle availability button
+  toggleAvailabilityBtn.addEventListener('click', () => {
+    // Implement toggle availability functionality here
+    console.log('Toggle availability button clicked');
+  });
+
+ // Fetch available rides
+ async function fetchAvailableRides() {
+  try {
+    const response = await fetch(`${API_BASE_URL}/driver/avail-ride`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${currentUser.token}`
+      }
+    });
+    
+    const rides = await response.json();
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
+    displayAvailableRides(rides);
+  } catch (error) {
+    console.error('Error fetching available rides:', error);
+  }
+ }
+
+ function displayAvailableRides(rides) {
+    if (!rides || rides.length === 0) {
+        availableRidesTableBody.innerHTML = '<tr><td colspan="6" style="text-align: center;">No available rides</td></tr>';
+        return;
+    }
+  availableRidesTableBody.innerHTML = '';
+  if (rides.length === 0) {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td colspan="6" style="text-align: center;">No available rides</td>
+    `;
+    availableRidesTableBody.appendChild(row);
+    return;
+  }
+  rides.forEach(ride => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${ride.userName}</td>
+      <td>${ride.pickupLocation}</td>
+      <td>${ride.destination}</td>
+      <td>${ride.distance} mi</td>
+      <td>$${ride.fare}</td>
+      <td><button class="btn btn-sm btn-primary accept-ride-btn" data-ride-id="${ride._id}">Accept</button></td>
+    `;
+    availableRidesTableBody.appendChild(row);
+  });
+}
+
+ // Fetch and display current ride
+  async function fetchCurrentRide() {
+  try {
+    const response = await fetch(`${API_BASE_URL}/driver/current-ride/${currentUser.id}`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${currentUser.token}`
+      }
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const ride = await response.json();
+
+    displayCurrentRide(ride);
+  } catch (error) {
+    console.error('Error fetching current ride:', error);
+  }
+}
+  //accept ride
+availableRidesTableBody.addEventListener('click', async (e) => {
+  if (e.target.classList.contains('accept-ride-btn')) {
+    const rideId = e.target.getAttribute('data-ride-id');
+   
+    try {
+        
+      const response = await fetch(`${API_BASE_URL}/driver/accept-job/${rideId}`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${currentUser.token}`
+        }
+      });
+       
+      const result = await response.json();
+     
+      fetchAvailableRides(); // Refresh available rides
+      fetchCurrentRide(); // Fetch and display current ride
+    } catch (error) {
+      console.error('Error accepting ride:', error);
+    }
+  }
+});
+ // Display current ride
+ function displayCurrentRide(ride) {
+  if (!ride) {
+    currentRideDetails.innerHTML = '<p>No current ride</p>';
+    completeRideBtn.style.display = 'none';
+    cancelRideBtn.style.display = 'none';
+    return;
+  }
+
+  currentRideDetails.innerHTML = `
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
+      <div>
+        <p style="font-weight: bold;">Passenger:</p>
+        <p>${ride.userName}</p>
+      </div>
+      <div>
+        <p style="font-weight: bold;">Phone:</p>
+        <p>${ride.userPhone}</p>
+      </div>
+      <div>
+        <p style="font-weight: bold;">Pickup:</p>
+        <p>${ride.pickupLocation}</p>
+      </div>
+      <div>
+        <p style="font-weight: bold;">Destination:</p>
+        <p>${ride.destination}</p>
+      </div>
+      <div>
+        <p style="font-weight: bold;">Distance:</p>
+        <p>${ride.distance} miles</p>
+      </div>
+      <div>
+        <p style="font-weight: bold;">Estimated Fare:</p>
+        <p>$${ride.estimatedFare}</p>
+      </div>
+    </div>
+  `;
+  completeRideBtn.style.display = 'block';
+  cancelRideBtn.style.display = 'block';
+}
+
+  //complete ride button
+    completeRideBtn.addEventListener('click', async () => {
+    
+        const fare = prompt('Enter the final fare:');
+        if (!fare || isNaN(fare)) {
+        alert('Fare must be a valid number.');
+        return;
+        }
+    
+        try {
+            const ride = await fetch(`${API_BASE_URL}/driver/current-ride/${currentUser.id}`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${currentUser.token}`
+      }
+     });
+     const rideData = await ride.json();
+        const response = await fetch(`${API_BASE_URL}/driver/complete-job/${rideData._id}`, {
+            method: 'PATCH',
+            headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${currentUser.token}`
+            },
+            body: JSON.stringify({ fare })
+        });
+    
+        if (!response.ok) {
+            throw new Error('Error completing ride');
+        }
+    
+        alert('Ride completed successfully!');
+        fetchCurrentRide(); // Refresh current ride
+        fetchAvailableRides(); // Refresh available rides
+    
+        } catch (error) {
+        console.error('Error completing ride:', error);
+        alert(`Error completing ride: ${error.message}`);
+        }
+    });
+
+  //profile update
+document.getElementById('driver-profile-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  
+  const name = document.getElementById('driver-profile-name').value.trim();
+  const password = document.getElementById('driver-profile-password').value;
+  const confirmPassword = document.getElementById('driver-profile-confirm-password').value;
+
+ 
+
+  if (password && password !== confirmPassword) {
+    alert('Passwords do not match');
+    return;
+  }
+  
+  try {
+    const updateData = { name };
+    if (password) updateData.password = password;
+    
+    const response = await fetch(`${API_BASE_URL}/update/${currentUser._id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${currentUser.token}`
+      },
+      body: JSON.stringify(updateData)
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.error || 'Update failed');
+    }
+
+    // Update local user data
+    const updatedUser = { ...currentUser, name };
+    localStorage.setItem('user', JSON.stringify(updatedUser));
+    currentUser = updatedUser;
+
+    alert('Profile updated successfully!');
+  } catch (error) {
+    console.error('Update error:', error);
+    alert(`Error: ${error.message}`);
+  }
+});
+
+
+fetchAvailableRides(); 
+fetchCurrentRide(); 
+});
+   
+
+
+
+
+//##############################################################################################################################################
+    // Load admin dashboard data
+   
+    async function loadAdminDashboard() {
+        try {
+            // Fetch users, drivers, rides
+            const [usersRes, driversRes, ridesRes] = await Promise.all([
+                fetch(`${API_BASE_URL}/admin/users`, {
+                    headers: {
+                        'Authorization': `Bearer ${currentUser.token}`
+                    }
+                }),
+                fetch(`${API_BASE_URL}/admin/drivers`, {
+                    headers: {
+                        'Authorization': `Bearer ${currentUser.token}`
+                    }
+                }),
+                fetch(`${API_BASE_URL}/admin/rides`, {
+                    headers: {
+                        'Authorization': `Bearer ${currentUser.token}`
+                    }
+                })
+            ]);
+            
+            if (!usersRes.ok || !driversRes.ok || !ridesRes.ok) {
+                throw new Error('Failed to load admin data');
+            }
+            
+            const users = await usersRes.json();
+            const drivers = await driversRes.json();
+            const rides = await ridesRes.json();
+            
+            // Update UI with admin data
+            // You would implement this based on your API response structure
+            
+        } catch (error) {
+            console.error('Error loading admin dashboard:', error);
+        }
+    }
+    
+    
+   
+  document.addEventListener('DOMContentLoaded', () => {
+    const API_BASE_URL = 'http://localhost:3000';
+    let currentUser = JSON.parse(localStorage.getItem('user'));
+
+    // Show admin dashboard
+    document.getElementById('admin-email').textContent = currentUser.email;
+    document.getElementById('admin-dashboard').style.display = 'block';
+
+    // Load admin dashboard data
+    loadAdminDashboard();
+
+    // Sidebar navigation
+    const sidebarLinks = document.querySelectorAll('.sidebar-menu a[data-section]');
+    sidebarLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const section = link.getAttribute('data-section');
+            showSection(section);
+        });
+    });
+
+    // Logout button
+    document.getElementById('admin-logout-btn').addEventListener('click', () => {
+        localStorage.removeItem('user');
+        window.location.href = '/login.html';
+    });
+
+    // Search functionality
+    document.getElementById('search-btn').addEventListener('click', () => {
+        const query = document.getElementById('search-input').value;
+        // Implement search functionality here
+        console.log('Search query:', query);
+    });
+
+    // Add user button
+    document.getElementById('add-user-btn').addEventListener('click', () => {
+        showModal('user-modal');
+    });
+
+    // Add driver button
+    document.getElementById('add-driver-btn').addEventListener('click', () => {
+        showModal('driver-modal');
+    });
+
+    // Filter rides button
+    document.getElementById('filter-rides-btn').addEventListener('click', () => {
+        const status = document.getElementById('ride-status-filter').value;
+        const query = document.getElementById('ride-search').value;
+        // Implement ride filtering functionality here
+        console.log('Filter rides by status:', status, 'and query:', query);
+    });
+
+async function fetchUsers() {
+    try {
+        const response = await fetch(`${API_BASE_URL}/admin/users`, {
+            method : `GET`,
+            headers: {
+                'Authorization': `Bearer ${currentUser.token}`
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const users = await response.json();
+        const tbody = document.getElementById('users-table-body');
+        tbody.innerHTML = '';
+
+        users.forEach(user => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${user._id}</td>
+                <td>${user.name}</td>
+                <td>${user.email}</td>
+                <td>${user.phone}</td>
+                <td>${new Date(user.joined).toLocaleDateString()}</td>
+                <td>${user.rides}</td>
+                <td>
+                    <button class="btn btn-sm btn-primary" onclick="editUser('${user._id}')">Edit</button>
+                    <button class="btn btn-sm btn-danger" onclick="deleteUser('${user._id}')">Delete</button>
+                </td>
+            `;
+            tbody.appendChild(row);
+        });
+    } catch (error) {
+        console.error('Error fetching users:', error);
+    }
+}
+
+async function fetchDrivers() {
+    try {
+        const response = await fetch(`${API_BASE_URL}/admin/drivers`, {
+            headers: {
+                'Authorization': `Bearer ${currentUser.token}`
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const drivers = await response.json();
+        const tbody = document.getElementById('drivers-table-body');
+        tbody.innerHTML = '';
+
+        drivers.forEach(driver => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${driver._id}</td>
+                <td>${driver.name}</td>
+                <td>${driver.email}</td>
+                <td>${driver.vehicleModel}</td>
+                <td>${driver.status}</td>
+                <td>${driver.averageRating}</td>
+                <td>
+                    <button class="btn btn-sm btn-primary" onclick="editDriver('${driver._id}')">Edit</button>
+                    <button class="btn btn-sm btn-danger" onclick="deleteDriver('${driver._id}')">Delete</button>
+                </td>
+            `;
+            tbody.appendChild(row);
+        });
+    } catch (error) {
+        console.error('Error fetching drivers:', error);
+    }
+}
+
+async function fetchRides() {
+    try {
+        const response = await fetch(`${API_BASE_URL}/admin/rides`, {
+            headers: {
+                'Authorization': `Bearer ${currentUser.token}`
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const rides = await response.json();
+        const tbody = document.getElementById('rides-table-body');
+        tbody.innerHTML = '';
+
+        rides.forEach(ride => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${ride._id}</td>
+                <td>${ride.userName}</td>
+                <td>${ride.driverName || 'N/A'}</td>
+                <td>${ride.pickupLocation}</td>
+                <td>${ride.destination}</td>
+                <td>$${ride.fare}</td>
+                <td>${ride.status}</td>
+                <td>
+                    <button class="btn btn-sm btn-primary" onclick="viewRide('${ride._id}')">View</button>
+                    <button class="btn btn-sm btn-danger" onclick="deleteRide('${ride._id}')">Delete</button>
+                </td>
+            `;
+            tbody.appendChild(row);
+        });
+    } catch (error) {
+        console.error('Error fetching rides:', error);
+    }
+}
+
+
+
+    fetchUsers();
+    fetchDrivers();
+    fetchRides();
+  });
+  
+
+async function deleteUser(userId) {
+    if (confirm('Are you sure you want to delete this user?')) {
+        try {
+            const response = await fetch(`${API_BASE_URL}/admin/delete/${userId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${currentUser.token}`
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            alert('User deleted successfully!');
+            fetchUsers();
+        } catch (error) {
+            console.error('Error deleting user:', error);
+            alert('Failed to delete user: ' + error.message);
+        }
+    }
+}
+
+async function deleteDriver(driverId) {
+    if (confirm('Are you sure you want to delete this driver?')) {
+        try {
+            const response = await fetch(`${API_BASE_URL}/admin/delete/${driverId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${currentUser.token}`
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            alert('Driver deleted successfully!');
+            fetchDrivers();
+        } catch (error) {
+            console.error('Error deleting driver:', error);
+            alert('Failed to delete driver: ' + error.message);
+        }
+    }
+}
+
+async function deleteRide(rideId) {
+    if (confirm('Are you sure you want to delete this ride?')) {
+        try {
+            const response = await fetch(`${API_BASE_URL}/admin/delete/${rideId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${currentUser.token}`
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            alert('Ride deleted successfully!');
+            fetchRides();
+        } catch (error) {
+            console.error('Error deleting ride:', error);
+            alert('Failed to delete ride: ' + error.message);
+        }
+    }
+}
+
+function showSection(sectionId) {
+    document.querySelectorAll('.main-content > div').forEach(section => {
+        section.style.display = 'none';
+    });
+    document.querySelector(`#${sectionId}-section`).style.display = 'block';
+    sidebarLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('data-section') === sectionId) {
+            link.classList.add('active');
+        }
+    });
+}
+
+</script>
+</body>
+</html>
