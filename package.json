@@ -4,7 +4,7 @@
   "description": "��#\u0000 \u0000Y\u00002\u0000S\u00002\u0000\r\u0000 \u0000",
   "main": "index.js",
   "scripts": {
-    "test":"echo \"Running tests...\"",
+    "test":"jest",
     "start": "node index.js"
   },
   "repository": {
