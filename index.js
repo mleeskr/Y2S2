@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 const path = require('path');
 
 
@@ -13,7 +13,8 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
                                                                       
-const url = 'mongodb://localhost:27017';
+const url = process.env.MONGO_URI || 'mongodb://localhost:27017';
+
 const dbName = 'rideHailingDB';
 const JWT_SECRET = 'your_jwt_secret_key'; // Change this in production
 
