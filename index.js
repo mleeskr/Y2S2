@@ -13,8 +13,8 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
                                                                       
-const url = process.env.PORT|| 'mongodb://localhost:3000';
-
+const PORT = process.env.PORT || 3000; // 🔥 Correct Azure port binding
+const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017'; // 🔥 Correct MongoDB URI
 const dbName = 'rideHailingDB';
 const JWT_SECRET = 'your_jwt_secret_key'; // Change this in production
 
@@ -61,8 +61,8 @@ async function startServer() {
     process.exit(0);
   });
   
-  app.listen(port, () => {
-    console.log(`🚀 Server running at http://localhost:${port}`);
+  app.listen(PORT, () => {
+    console.log(`🚀 Server running on port ${PORT}`);
   });
 }
 
