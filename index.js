@@ -13,7 +13,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
                                                                       
-const url = process.env.MONGO_URI || 'mongodb://localhost:27017';
+const url = process.env.PORT|| 'mongodb://localhost:3000';
 
 const dbName = 'rideHailingDB';
 const JWT_SECRET = 'your_jwt_secret_key'; // Change this in production
