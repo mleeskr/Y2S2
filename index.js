@@ -33,7 +33,7 @@ let completedRidesCollection;
 // Initialize database connection
 async function initializeDatabase() {
   try {
-    const client = await MongoClient.connect(url);
+    const client = await MongoClient.connect(MONGO_URI);
     console.log('✅ Connected successfully to MongoDB');
     
     db = client.db(dbName);
